@@ -10,9 +10,8 @@ const {
     useMultiFileAuthState,
     delay,
     makeCacheableSignalKeyStore,
-    Browsers,
-    fetchLatestBaileysVersion
-} = require("@fredi/baileys");
+    Browsers
+} = require("@fredi/baileys"); // Kept as requested
 
 function randomMegaId(length = 6, numberLength = 4) {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -59,11 +58,9 @@ router.get('/', async (req, res) => {
     const id = giftedid();
     let num = req.query.number;
     async function GIFTED_PAIR_CODE() {
-        const { version } = await fetchLatestBaileysVersion();
         const { state, saveCreds } = await useMultiFileAuthState('./temp/' + id);
         try {
             let Gifted = Gifted_Tech({
-                version,
                 auth: {
                     creds: state.creds,
                     keys: makeCacheableSignalKeyStore(state.keys, pino({ level: "fatal" }).child({ level: "fatal" })),
